@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — All PDF Reader App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f5f4f2;
+      --surface: #ffffff;
+      --surface2: #f9f8f6;
+      --border: #e8e5e0;
+      --accent: #e53e1e;
+      --accent2: #c53030;
+      --accent-soft: rgba(229,62,30,0.08);
+      --accent-border: rgba(229,62,30,0.2);
+      --blue: #2563eb;
+      --blue-bg: rgba(37,99,235,0.07);
+      --blue-border: rgba(37,99,235,0.18);
+      --green: #15803d;
+      --green-bg: rgba(21,128,61,0.08);
+      --green-border: rgba(21,128,61,0.2);
+      --amber: #b45309;
+      --amber-bg: rgba(180,83,9,0.08);
+      --amber-border: rgba(180,83,9,0.2);
+      --slate: #475569;
+      --text: #1a1917;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --radius: 12px;
+      --radius-sm: 7px;
+      --shadow: 0 1px 4px rgba(0,0,0,0.05), 0 4px 16px rgba(0,0,0,0.04);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 15px;
+      overflow-x: hidden;
+    }
+
+    /* Subtle paper texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* ── Hero Banner ── */
+    .hero {
+      background: linear-gradient(135deg, #1a1917 0%, #2d2926 60%, #3d1a15 100%);
+      margin: 0 -24px 52px;
+      padding: 52px 24px 48px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(229,62,30,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #f97316, var(--accent));
+    }
+
+    .hero-inner {
+      max-width: 832px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .pdf-icon-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .pdf-icon {
+      width: 72px; height: 88px;
+      background: linear-gradient(160deg, #ffffff 0%, #f0ede8 100%);
+      border-radius: 8px 8px 8px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    .pdf-icon::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 20px; height: 20px;
+      background: #e8e4df;
+      border-radius: 0 8px 0 8px;
+    }
+
+    .pdf-icon .pdf-label {
+      background: var(--accent);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-top: 6px;
+    }
+
+    .pdf-icon .pdf-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 8px;
+      width: 38px;
+    }
+
+    .pdf-icon .pdf-lines span {
+      height: 3px;
+      background: #d1cdc7;
+      border-radius: 2px;
+    }
+
+    .pdf-icon .pdf-lines span:nth-child(2) { width: 70%; }
+    .pdf-icon .pdf-lines span:nth-child(3) { width: 85%; }
+
+    .hero-text { flex: 1; min-width: 200px; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-size: clamp(24px, 4.5vw, 38px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: #f8f6f3;
+      margin-bottom: 8px;
+    }
+
+    .hero .company {
+      font-size: 13px;
+      color: rgba(248,246,243,0.45);
+      font-weight: 400;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .hero-chip.date {
+      background: rgba(229,62,30,0.2);
+      color: #fca28a;
+      border: 1px solid rgba(229,62,30,0.25);
+    }
+
+    .hero-chip.offline {
+      background: rgba(21,128,61,0.2);
+      color: #86efac;
+      border: 1px solid rgba(21,128,61,0.25);
+    }
+
+    .hero-chip.noad {
+      background: rgba(37,99,235,0.2);
+      color: #93c5fd;
+      border: 1px solid rgba(37,99,235,0.25);
+    }
+
+    /* ── TOC ── */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      margin-bottom: 36px;
+      box-shadow: var(--shadow);
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .toc-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2px;
+    }
+
+    .toc-grid a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .toc-grid a:hover { background: var(--surface2); color: var(--accent); }
+
+    .toc-grid a .n {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--text-dim);
+      min-width: 20px;
+    }
+
+    /* ── Section cards ── */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px 30px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+      animation: fadeUp 0.55s ease both;
+      border-left: 3px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .section:hover { border-left-color: var(--accent); }
+    .section:nth-child(1) { animation-delay: 0.12s; }
+    .section:nth-child(2) { animation-delay: 0.17s; }
+    .section:nth-child(3) { animation-delay: 0.22s; }
+    .section:nth-child(4) { animation-delay: 0.27s; }
+    .section:nth-child(5) { animation-delay: 0.32s; }
+    .section:nth-child(6) { animation-delay: 0.37s; }
+    .section:nth-child(7) { animation-delay: 0.42s; }
+    .section:nth-child(8) { animation-delay: 0.47s; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: 5px;
+      padding: 3px 7px;
+      margin-top: 3px;
+      white-space: nowrap;
+    }
+
+    .section h2 {
+      font-size: clamp(15px, 2.5vw, 18px);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+    }
+
+    .section p {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      margin-bottom: 12px;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    /* ── Sub-section ── */
+    .subsection { margin: 16px 0; }
+
+    .subsection h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .subsection h3::before {
+      content: '';
+      width: 3px; height: 13px;
+      background: var(--accent);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    /* ── Note boxes ── */
+    .note {
+      border-radius: var(--radius-sm);
+      padding: 13px 16px;
+      margin: 14px 0;
+      font-size: 13px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .note.blue {
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      border-left: 3px solid var(--blue);
+      color: #1e3a8a;
+    }
+
+    .note.amber {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+      border-left: 3px solid var(--amber);
+      color: #78350f;
+    }
+
+    .note.green {
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      border-left: 3px solid var(--green);
+      color: #14532d;
+    }
+
+    .note .ni { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Permission cards ── */
+    .perm-grid {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0;
+    }
+
+    .perm-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px 14px;
+      align-items: start;
+    }
+
+    .perm-name {
+      grid-column: 1 / -1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent2);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: 5px;
+      padding: 4px 10px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .perm-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      grid-column: 1 / -1;
+    }
+
+    /* ── Tables ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 16px 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      min-width: 480px;
+    }
+
+    thead tr { background: var(--surface2); }
+
+    thead th {
+      text-align: left;
+      padding: 11px 16px;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    tbody tr { border-top: 1px solid var(--border); transition: background 0.12s; }
+    tbody tr:hover { background: var(--surface2); }
+
+    tbody td {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      vertical-align: top;
+      font-size: 13px;
+    }
+
+    tbody td:first-child {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--text);
+      min-width: 140px;
+    }
+
+    .badge-yes {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      color: var(--green);
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 11.5px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge-na {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(148,163,184,0.12);
+      border: 1px solid rgba(148,163,184,0.2);
+      color: var(--text-dim);
+      border-radius: 999px;
+      padding: 2px 9px;
+      font-size: 11.5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .table-link {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 12px;
+      border-bottom: 1px dashed rgba(37,99,235,0.3);
+      transition: border-color 0.15s;
+    }
+
+    .table-link:hover { border-color: var(--blue); }
+
+    /* ── Bullet list ── */
+    .policy-list {
+      list-style: none;
+      display: grid;
+      gap: 9px;
+      margin: 12px 0;
+    }
+
+    .policy-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--text-muted);
+      font-size: 14.5px;
+    }
+
+    .policy-list li::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      min-width: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 9px;
+    }
+
+    /* ── Open source callout ── */
+    .oss-callout {
+      background: linear-gradient(135deg, rgba(21,128,61,0.06), rgba(37,99,235,0.06));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin: 14px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .oss-callout .oss-badge {
+      background: rgba(21,128,61,0.1);
+      border: 1px solid var(--green-border);
+      color: var(--green);
+      font-size: 10.5px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 8px;
+      border-radius: 5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── Contact ── */
+    .contact-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-item .icon {
+      width: 38px; height: 38px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 17px;
+      flex-shrink: 0;
+    }
+
+    .contact-item .label { font-size: 10.5px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .contact-item a { color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 500; transition: opacity 0.2s; }
+    .contact-item a:hover { opacity: 0.7; }
+    .contact-item .co { font-size: 13px; font-weight: 600; color: var(--text); }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .page-wrapper { padding: 0 14px 60px; }
+      .hero { margin: 0 -14px 40px; padding: 38px 14px 36px; }
+      .hero-inner { gap: 18px; }
+      .pdf-icon { width: 56px; height: 68px; }
+      .section { padding: 18px 16px; }
+      .toc { padding: 18px 16px; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .contact-card { flex-direction: column; }
+      table { min-width: 420px; }
+    }
+
+    @media (max-width: 400px) {
+      .hero h1 { font-size: 22px; }
+      .section h2 { font-size: 15px; }
+      .pdf-icon-wrap { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Hero Banner -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="pdf-icon-wrap">
+        <div class="pdf-icon">
+          <div class="pdf-label">PDF</div>
+          <div class="pdf-lines">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-text">
+        <div class="hero-eyebrow">Privacy Policy</div>
+        <h1>All PDF Reader App</h1>
+        <div class="company">TORTUGA APPS (SMC-PRIVATE) LIMITED</div>
+        <div class="hero-meta">
+          <span class="hero-chip date">📅 26 October 2025</span>
+          <span class="hero-chip offline">⬤ Offline-First</span>
+          <span class="hero-chip noad">✕ No Ads · No Analytics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of Contents">
+    <div class="toc-label">Table of Contents</div>
+    <div class="toc-grid">
+      <a href="#s1"><span class="n">01</span> Introduction</a>
+      <a href="#s2"><span class="n">02</span> Information We Collect</a>
+      <a href="#s3"><span class="n">03</span> Permissions Used</a>
+      <a href="#s4"><span class="n">04</span> Third-Party SDKs</a>
+      <a href="#s5"><span class="n">05</span> Data Retention &amp; Security</a>
+      <a href="#s6"><span class="n">06</span> Children's Privacy</a>
+      <a href="#s7"><span class="n">07</span> Changes to This Policy</a>
+      <a href="#s8"><span class="n">08</span> Contact Us</a>
+    </div>
+  </nav>
+
+  <!-- S1 Introduction -->
+  <section class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Introduction</h2>
+    </div>
+    <p>
+      <strong>TORTUGA APPS (SMC-PRIVATE) LIMITED</strong> ("we", "us", or "our") respects your privacy. This Privacy Policy outlines how the <strong>All PDF Reader</strong> app ("the App") manages user data and utilizes device permissions.
+    </p>
+    <p>
+      The App is a utility tool designed to read and manage PDF files locally on your device. It does not contain advertisements or analytics, and functions primarily offline — with the sole exception of loading this Privacy Policy page when specifically requested by the user.
+    </p>
+    <div class="note green">
+      <span class="ni">📄</span>
+      <span>All PDF processing happens entirely on your device. Your documents are never uploaded, shared, or transmitted anywhere.</span>
+    </div>
+  </section>
+
+  <!-- S2 Information We Collect -->
+  <section class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Information We Collect</h2>
+    </div>
+
+    <div class="subsection">
+      <h3>User-Provided Data</h3>
+      <p>The App processes files selected by the user for reading. The content of these files and user interactions within documents (such as scrolling or page navigation) are processed locally on your device and are never sent to our servers or any third party. We do not access or collect the content of your PDF files.</p>
+    </div>
+
+    <div class="subsection">
+      <h3>Automatically Collected Data</h3>
+      <p>The App does not automatically collect personal or device data. It contains no analytics or advertising SDKs.</p>
+    </div>
+  </section>
+
+  <!-- S3 Permissions -->
+  <section class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Permissions Used in the App</h2>
+    </div>
+    <p>The App uses the following Android permissions to deliver its core file reading functionality:</p>
+
+    <div class="perm-grid">
+      <div class="perm-card">
+        <span class="perm-name">READ_EXTERNAL_STORAGE</span>
+        <p class="perm-desc">Required to allow the user to select and open PDF files from their device's storage. Used for devices running Android 12 and older.</p>
+      </div>
+      <div class="perm-card">
+        <span class="perm-name">MANAGE_EXTERNAL_STORAGE</span>
+        <p class="perm-desc">Required for the App to access and manage (view, open, organize) all PDF files on the device, as is necessary for a comprehensive file reader application.</p>
+      </div>
+    </div>
+
+    <div class="note blue">
+      <span class="ni">ℹ️</span>
+      <span>All file management and reading operations are conducted locally on your device. The App does not send or receive any file or personal data over the internet.</span>
+    </div>
+  </section>
+
+  <!-- S4 SDKs -->
+  <section class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Third-Party SDKs &amp; Families Policy Compliance</h2>
+    </div>
+    <p>The App uses standard Android support libraries and a PDF viewing library for core functionality and interface design. All listed SDKs comply with Google's Families Policy.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>SDK Name</th>
+            <th>Purpose</th>
+            <th>Families Policy</th>
+            <th>Privacy Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>androidx.core.ktx</td>
+            <td>Kotlin extensions</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/core" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.appcompat</td>
+            <td>Backward compatibility</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/appcompat" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>com.google.android.material</td>
+            <td>UI Components</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://policies.google.com/privacy" target="_blank">Google Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.activity</td>
+            <td>Activity lifecycle support</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/activity" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.constraintlayout</td>
+            <td>Layout design</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/constraintlayout" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>com.github.mhiew:<br>android-pdf-viewer</td>
+            <td>Core functionality for viewing PDF files — processes files locally only.</td>
+            <td><span class="badge-na">N/A — Open Source</span></td>
+            <td><span class="badge-na">N/A — Local Only</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="oss-callout">
+      <span class="oss-badge">OPEN SOURCE</span>
+      <span>The PDF viewer library (<strong style="color:var(--text)">com.github.mhiew:android-pdf-viewer</strong>) is an open-source tool that processes files entirely on the device and does not transmit any data. It is not subject to a third-party privacy policy.</span>
+    </div>
+
+    <div class="note amber">
+      <span class="ni">ℹ️</span>
+      <span><strong>Disclaimer:</strong> TORTUGA APPS (SMC-PRIVATE) LIMITED does not control these SDKs individually. Each is subject to its own privacy policy where applicable.</span>
+    </div>
+  </section>
+
+  <!-- S5 Data Retention -->
+  <section class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Data Retention &amp; Security</h2>
+    </div>
+    <p>The App does not collect, store, or transmit personal data or the content of your documents.</p>
+    <ul class="policy-list">
+      <li>All processing of PDF files and user interaction is done locally on the device.</li>
+      <li>The App follows industry best practices for secure coding and local data handling.</li>
+    </ul>
+  </section>
+
+  <!-- S6 Children's Privacy -->
+  <section class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Children's Privacy</h2>
+    </div>
+    <p>
+      This App is suitable for users of all ages and is not specifically directed toward children under 13. Given that the App does not collect, store, or share any personal data from any user, it inherently maintains a high standard of children's privacy.
+    </p>
+  </section>
+
+  <!-- S7 Changes -->
+  <section class="section" id="s7">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Changes to This Privacy Policy</h2>
+    </div>
+    <p>We may update this policy to reflect changes in legal or functional requirements. Updates will be posted on this page.</p>
+    <div class="note blue">
+      <span class="ni">🔔</span>
+      <span>We recommend checking this page periodically for any updates.</span>
+    </div>
+  </section>
+
+  <!-- S8 Contact -->
+  <section class="section" id="s8">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Contact Us</h2>
+    </div>
+    <p>For questions or concerns about this Privacy Policy, please reach out:</p>
+    <div class="contact-card">
+      <div class="contact-item">
+        <div class="icon">📧</div>
+        <div>
+          <div class="label">Email</div>
+          <a href="mailto:tortugaappsdev@gmail.com">tortugaappsdev@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">🏢</div>
+        <div>
+          <div class="label">Company</div>
+          <span class="co">TORTUGA APPS (SMC-PRIVATE) LIMITED</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 TORTUGA APPS (SMC-PRIVATE) LIMITED. All rights reserved.</p>
+    <p style="margin-top:5px;">All PDF Reader — Privacy Policy v1.0</p>
+  </footer>
+
+</div>
+</body>
+</html>

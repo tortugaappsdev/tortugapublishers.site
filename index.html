@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tortuga Apps — Android App Studio</title>
+  <meta name="description" content="Tortuga Apps builds high-quality Android apps for everyone — from kids' education to productivity tools."/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #07090f;
+      --bg2: #0c0f1a;
+      --surface: #111520;
+      --surface2: #161b2e;
+      --border: #1e2540;
+      --border2: #252d4a;
+      --accent: #00d4ff;
+      --accent2: #0099cc;
+      --accent-soft: rgba(0,212,255,0.08);
+      --accent-border: rgba(0,212,255,0.2);
+      --green: #00e5a0;
+      --green-soft: rgba(0,229,160,0.08);
+      --coral: #ff6b6b;
+      --coral-soft: rgba(255,107,107,0.08);
+      --gold: #ffd166;
+      --gold-soft: rgba(255,209,102,0.08);
+      --purple: #b56bff;
+      --purple-soft: rgba(181,107,255,0.08);
+      --text: #eef2ff;
+      --text-muted: #7a85a8;
+      --text-dim: #3a4060;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --nav-h: 70px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════
+       BACKGROUND EFFECTS
+    ═══════════════════════════════════ */
+    .bg-glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-glow-1 {
+      top: -200px; left: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,212,255,0.05) 0%, transparent 70%);
+    }
+
+    .bg-glow-2 {
+      bottom: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(181,107,255,0.04) 0%, transparent 70%);
+    }
+
+    /* ═══════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      background: rgba(7,9,15,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--accent), var(--green));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(0,212,255,0.3);
+    }
+
+    .nav-logo .logo-text {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .nav-logo .logo-text span { color: var(--accent); }
+    .nav-logo .logo-sub { font-size: 10px; color: var(--text-muted); font-weight: 400; letter-spacing: 0.05em; }
+
+    /* Desktop nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); background: var(--surface2); }
+
+    /* Apps dropdown */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown > a {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .nav-dropdown > a::after {
+      content: '';
+      width: 6px; height: 6px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+
+    .nav-dropdown:hover > a::after { transform: rotate(225deg) translateY(-2px); }
+
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      right: 0;
+      min-width: 260px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: all 0.22s ease;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .nav-dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .dropdown-item:hover { background: var(--surface2); color: var(--text); }
+    .dropdown-item .di-icon { font-size: 18px; flex-shrink: 0; }
+
+    .dropdown-item .di-info { flex: 1; }
+    .dropdown-item .di-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 1px; }
+    .dropdown-item .di-label { font-size: 11px; color: var(--text-muted); }
+
+    .dropdown-divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+    .dropdown-policy-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      border-radius: 7px;
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      transition: background 0.15s;
+    }
+
+    .dropdown-policy-link:hover { background: var(--accent-soft); }
+
+    /* CTA button */
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--accent);
+      color: var(--bg) !important;
+      font-weight: 700 !important;
+      padding: 8px 18px !important;
+      border-radius: 8px !important;
+      font-size: 13.5px !important;
+      transition: opacity 0.2s, transform 0.15s !important;
+      background: none !important;
+      background-color: var(--accent) !important;
+    }
+
+    .nav-cta:hover { opacity: 0.88 !important; transform: translateY(-1px) !important; background-color: var(--accent) !important; }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: background 0.2s;
+    }
+
+    .nav-hamburger:hover { background: var(--surface2); }
+
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+      padding: 16px 20px 24px;
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .mobile-menu.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu-section { margin-bottom: 16px; }
+
+    .mobile-menu-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 0 4px;
+      margin-bottom: 6px;
+    }
+
+    .mobile-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .mobile-nav-link:hover { background: var(--surface); color: var(--text); }
+    .mobile-nav-link .mn-icon { font-size: 18px; }
+
+    .mobile-app-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 8px;
+    }
+
+    .mobile-app-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mobile-app-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .mobile-app-link {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid;
+      transition: opacity 0.2s;
+    }
+
+    .mobile-app-link:hover { opacity: 0.75; }
+    .mobile-app-link.play { color: var(--green); border-color: rgba(0,229,160,0.3); background: var(--green-soft); }
+    .mobile-app-link.policy { color: var(--accent); border-color: var(--accent-border); background: var(--accent-soft); }
+
+    /* ═══════════════════════════════════
+       HERO
+    ═══════════════════════════════════ */
+    .hero {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: calc(var(--nav-h) + 60px) 5% 80px;
+      overflow: hidden;
+    }
+
+    /* Star field */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 15%, rgba(255,255,255,0.25) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 55% 40%, rgba(0,212,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 20%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 60%, rgba(181,107,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 70%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 92% 35%, rgba(0,229,160,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 62% 65%, rgba(255,255,255,0.2) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* Diagonal grid lines */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-content { animation: fadeUp 0.8s ease both; }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow .dot {
+      width: 7px; height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+      animation: blink 2s ease infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5.5vw, 68px);
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 .line-accent {
+      background: linear-gradient(90deg, var(--accent) 0%, var(--green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: clamp(15px, 1.5vw, 17px);
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 36px;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: var(--bg);
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 13px 28px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 30px rgba(0,212,255,0.25);
+    }
+
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 50px rgba(0,212,255,0.35); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      border: 1px solid var(--border2);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+    /* Hero stats */
+    .hero-stats {
+      display: flex;
+      gap: 28px;
+      margin-top: 48px;
+      padding-top: 36px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat { }
+
+    .stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--accent), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+
+    /* Hero visual — phone mockup grid */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .app-bubble-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      max-width: 320px;
+    }
+
+    .app-bubble {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px 18px;
+      text-align: center;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      cursor: default;
+    }
+
+    .app-bubble:hover {
+      transform: translateY(-4px);
+      border-color: var(--border2);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+
+    .app-bubble:nth-child(2) { margin-top: 24px; }
+    .app-bubble:nth-child(4) { margin-top: -24px; }
+
+    .app-bubble .ab-icon { font-size: 36px; margin-bottom: 10px; display: block; }
+    .app-bubble .ab-name { font-size: 12px; font-weight: 700; color: var(--text); line-height: 1.3; margin-bottom: 6px; }
+    .app-bubble .ab-tag {
+      font-size: 10px;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 2px 8px;
+      border: 1px solid;
+    }
+
+    .ab-tag.kids { color: var(--gold); border-color: rgba(255,209,102,0.3); background: var(--gold-soft); }
+    .ab-tag.ar   { color: var(--purple); border-color: rgba(181,107,255,0.3); background: var(--purple-soft); }
+    .ab-tag.util { color: var(--accent); border-color: var(--accent-border); background: var(--accent-soft); }
+    .ab-tag.pdf  { color: var(--coral); border-color: rgba(255,107,107,0.3); background: var(--coral-soft); }
+
+    /* ═══════════════════════════════════
+       APPS SECTION
+    ═══════════════════════════════════ */
+    section { position: relative; z-index: 1; }
+
+    .apps-section {
+      padding: 100px 5%;
+      background: var(--bg2);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 520px;
+      margin: 0 auto 56px;
+    }
+
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .app-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .app-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .app-card:nth-child(1):hover { border-color: rgba(255,209,102,0.4); }
+    .app-card:nth-child(2):hover { border-color: rgba(181,107,255,0.4); }
+    .app-card:nth-child(3):hover { border-color: rgba(0,212,255,0.4); }
+    .app-card:nth-child(4):hover { border-color: rgba(255,107,107,0.4); }
+
+    .app-card-icon {
+      font-size: 44px;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .app-card-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 3px 10px;
+      border: 1px solid;
+      margin-bottom: 14px;
+      width: fit-content;
+    }
+
+    .app-card-name {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+
+    .app-card-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      flex: 1;
+      margin-bottom: 22px;
+      line-height: 1.65;
+    }
+
+    .app-card-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 22px;
+    }
+
+    .feature-pill {
+      font-size: 11.5px;
+      font-weight: 500;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+
+    .app-card-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1px solid;
+      transition: transform 0.15s, opacity 0.2s;
+    }
+
+    .card-btn:hover { transform: translateY(-1px); opacity: 0.85; }
+
+    .card-btn.play { color: var(--bg); background: var(--green); border-color: var(--green); }
+    .card-btn.policy { color: var(--text-muted); background: transparent; border-color: var(--border2); }
+    .card-btn.policy:hover { color: var(--accent); border-color: var(--accent-border); background: var(--accent-soft); }
+
+    /* ═══════════════════════════════════
+       ABOUT SECTION
+    ═══════════════════════════════════ */
+    .about-section {
+      padding: 100px 5%;
+    }
+
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-content {}
+
+    .about-content .section-label,
+    .about-content .section-title { text-align: left; }
+
+    .about-content .section-title { margin-bottom: 18px; }
+
+    .about-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.75;
+    }
+
+    .about-values {
+      display: grid;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .value-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .value-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .value-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .value-desc { font-size: 13px; color: var(--text-muted); }
+
+    /* About visual */
+    .about-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .about-stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .about-stat-card:nth-child(2) { margin-top: 20px; }
+    .about-stat-card:nth-child(4) { margin-top: -20px; }
+
+    .asc-num {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--accent), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    .asc-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    /* ═══════════════════════════════════
+       COMPLIANCE SECTION
+    ═══════════════════════════════════ */
+    .compliance-section {
+      padding: 80px 5%;
+      background: var(--bg2);
+    }
+
+    .compliance-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .compliance-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .comp-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 20px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .comp-badge .cb-icon { font-size: 20px; }
+    .comp-badge.green { border-color: rgba(0,229,160,0.2); color: var(--green); }
+    .comp-badge.blue { border-color: rgba(0,212,255,0.2); color: var(--accent); }
+    .comp-badge.gold { border-color: rgba(255,209,102,0.2); color: var(--gold); }
+    .comp-badge.purple { border-color: rgba(181,107,255,0.2); color: var(--purple); }
+
+    /* ═══════════════════════════════════
+       CONTACT SECTION
+    ═══════════════════════════════════ */
+    .contact-section {
+      padding: 100px 5%;
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 40px;
+      margin-top: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+    }
+
+    .contact-email-display {
+      font-family: 'Fira Code', monospace;
+      font-size: clamp(16px, 3vw, 22px);
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-sm);
+      padding: 16px 24px;
+      display: inline-block;
+      margin: 20px 0 28px;
+      word-break: break-all;
+    }
+
+    .contact-info {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    /* ═══════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════ */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 40px 5% 30px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand { display: flex; align-items: center; gap: 10px; }
+
+    .footer-brand .logo-icon {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--green));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+
+    .footer-brand-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .footer-brand-name span { color: var(--accent); }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-dim);
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    /* ═══════════════════════════════════
+       ANIMATIONS
+    ═══════════════════════════════════ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════ */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none !important; }
+      .nav-hamburger { display: flex; }
+      .mobile-menu { display: block; }
+
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-visual { justify-content: flex-start; }
+      .app-bubble-grid { max-width: 100%; grid-template-columns: repeat(4, 1fr); }
+      .app-bubble:nth-child(2), .app-bubble:nth-child(4) { margin-top: 0; }
+
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .about-content .section-label,
+      .about-content .section-title { text-align: center; }
+      .about-visual { max-width: 380px; margin: 0 auto; }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding-top: calc(var(--nav-h) + 40px); min-height: auto; padding-bottom: 60px; }
+      .hero h1 { font-size: 36px; }
+      .apps-section, .about-section, .contact-section { padding: 70px 5%; }
+      .app-bubble-grid { grid-template-columns: 1fr 1fr; }
+      .app-bubble:nth-child(2) { margin-top: 24px; }
+      .app-bubble:nth-child(4) { margin-top: -24px; }
+      .hero-stats { flex-wrap: wrap; gap: 20px; }
+      .contact-card { padding: 32px 20px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .apps-grid { grid-template-columns: 1fr; }
+      .about-visual { grid-template-columns: 1fr 1fr; max-width: 100%; }
+      .about-stat-card:nth-child(2) { margin-top: 20px; }
+      .about-stat-card:nth-child(4) { margin-top: -20px; }
+    }
+
+    @media (max-width: 400px) {
+      .hero h1 { font-size: 30px; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-glow bg-glow-1"></div>
+<div class="bg-glow bg-glow-2"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-icon">🐢</div>
+      <div>
+        <div class="logo-text">Tortuga<span>Apps</span></div>
+        <div class="logo-sub">Android App Studio</div>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#apps">Apps</a></li>
+      <li><a href="#about">About</a></li>
+
+      <li class="nav-dropdown">
+        <a href="#">Privacy Policies</a>
+        <div class="dropdown-menu">
+
+          <div class="dropdown-item" style="pointer-events:none; opacity:0.5;">
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);">App Policies</span>
+          </div>
+
+          <a class="dropdown-item" href="#apps">
+            <span class="di-icon">🔢</span>
+            <div class="di-info">
+              <div class="di-name">Kids 123 Learning</div>
+              <div class="di-label">Number learning for children</div>
+            </div>
+          </a>
+          <a class="dropdown-policy-link" href="privacy-policy-kids123.html" target="_blank">
+            📄 View Privacy Policy →
+          </a>
+
+          <div class="dropdown-divider"></div>
+
+          <a class="dropdown-item" href="#apps">
+            <span class="di-icon">✏️</span>
+            <div class="di-info">
+              <div class="di-name">Easy Draw Anime</div>
+              <div class="di-label">AR drawing &amp; tracing</div>
+            </div>
+          </a>
+          <a class="dropdown-policy-link" href="privacy-policy-easydrawanime.html" target="_blank">
+            📄 View Privacy Policy →
+          </a>
+
+          <div class="dropdown-divider"></div>
+
+          <a class="dropdown-item" href="#apps">
+            <span class="di-icon">⚖️</span>
+            <div class="di-info">
+              <div class="di-name">Simple Unit Converter</div>
+              <div class="di-label">Offline unit conversion</div>
+            </div>
+          </a>
+          <a class="dropdown-policy-link" href="privacy-policy-simpleunitconverter.html" target="_blank">
+            📄 View Privacy Policy →
+          </a>
+
+          <div class="dropdown-divider"></div>
+
+          <a class="dropdown-item" href="#apps">
+            <span class="di-icon">📄</span>
+            <div class="di-info">
+              <div class="di-name">All PDF Reader</div>
+              <div class="di-label">Local PDF file manager</div>
+            </div>
+          </a>
+          <a class="dropdown-policy-link" href="privacy-policy-allpdfreader.html" target="_blank">
+            📄 View Privacy Policy →
+          </a>
+
+        </div>
+      </li>
+
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══ MOBILE MENU ═══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-section">
+    <div class="mobile-menu-label">Navigation</div>
+    <a class="mobile-nav-link" href="#apps" onclick="closeMenu()"><span class="mn-icon">📱</span> Our Apps</a>
+    <a class="mobile-nav-link" href="#about" onclick="closeMenu()"><span class="mn-icon">🏢</span> About Us</a>
+    <a class="mobile-nav-link" href="#contact" onclick="closeMenu()"><span class="mn-icon">✉️</span> Contact</a>
+  </div>
+
+  <div class="mobile-menu-section">
+    <div class="mobile-menu-label">App Privacy Policies</div>
+
+    <div class="mobile-app-item">
+      <div class="mobile-app-title">🔢 Kids 123 Learning</div>
+      <div class="mobile-app-links">
+        <a class="mobile-app-link play" href="https://play.google.com/store/apps/details?id=com.tortugaapps.kids123" target="_blank">▶ Play Store</a>
+        <a class="mobile-app-link policy" href="privacy-policy-kids123.html" target="_blank">📄 Privacy Policy</a>
+      </div>
+    </div>
+
+    <div class="mobile-app-item">
+      <div class="mobile-app-title">✏️ Easy Draw Anime</div>
+      <div class="mobile-app-links">
+        <a class="mobile-app-link play" href="https://play.google.com/store/apps/details?id=com.tortugaapps.artraceandsketch" target="_blank">▶ Play Store</a>
+        <a class="mobile-app-link policy" href="privacy-policy-easydrawanime.html" target="_blank">📄 Privacy Policy</a>
+      </div>
+    </div>
+
+    <div class="mobile-app-item">
+      <div class="mobile-app-title">⚖️ Simple Unit Converter</div>
+      <div class="mobile-app-links">
+        <a class="mobile-app-link play" href="https://play.google.com/store/apps/details?id=com.tortugaapps.simpleunitconverter" target="_blank">▶ Play Store</a>
+        <a class="mobile-app-link policy" href="privacy-policy-simpleunitconverter.html" target="_blank">📄 Privacy Policy</a>
+      </div>
+    </div>
+
+    <div class="mobile-app-item">
+      <div class="mobile-app-title">📄 All PDF Reader</div>
+      <div class="mobile-app-links">
+        <a class="mobile-app-link play" href="https://play.google.com/store/apps/details?id=com.tortugaapps.allpdfreader" target="_blank">▶ Play Store</a>
+        <a class="mobile-app-link policy" href="privacy-policy-allpdfreader.html" target="_blank">📄 Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span class="dot"></span> Android App Studio · Pakistan</div>
+      <h1>
+        We Build Apps<br>
+        <span class="line-accent">People Love</span>
+      </h1>
+      <p class="hero-desc">
+        Tortuga Apps crafts high-quality Android applications — from children's education tools to productivity utilities — built with care, compliance, and creativity.
+      </p>
+      <div class="hero-actions">
+        <a href="#apps" class="btn-primary">
+          <span>📱</span> Explore Our Apps
+        </a>
+        <a href="#about" class="btn-secondary">
+          Learn About Us
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">4+</div>
+          <div class="stat-label">Published Apps</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">1K+</div>
+          <div class="stat-label">Downloads</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Policy Compliant</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="app-bubble-grid">
+        <div class="app-bubble">
+          <span class="ab-icon">🔢</span>
+          <div class="ab-name">Kids 123 Learning</div>
+          <span class="ab-tag kids">Education</span>
+        </div>
+        <div class="app-bubble">
+          <span class="ab-icon">✏️</span>
+          <div class="ab-name">Easy Draw Anime</div>
+          <span class="ab-tag ar">AR · Creative</span>
+        </div>
+        <div class="app-bubble">
+          <span class="ab-icon">⚖️</span>
+          <div class="ab-name">Unit Converter</div>
+          <span class="ab-tag util">Utility</span>
+        </div>
+        <div class="app-bubble">
+          <span class="ab-icon">📄</span>
+          <div class="ab-name">All PDF Reader</div>
+          <span class="ab-tag pdf">Productivity</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPS SECTION ═══ -->
+<section class="apps-section" id="apps">
+  <div class="section-label">Our Portfolio</div>
+  <h2 class="section-title">Android Apps We've Built</h2>
+  <p class="section-desc">Each app is carefully designed, tested, and fully compliant with Google Play policies.</p>
+
+  <div class="apps-grid">
+
+    <!-- Kids 123 -->
+    <div class="app-card">
+      <span class="app-card-icon">🔢</span>
+      <span class="app-card-tag kids">Education · Kids</span>
+      <h3 class="app-card-name">123 Numbers Game: Count &amp; Trace</h3>
+      <p class="app-card-desc">A fun and engaging number learning app for young children. Features number tracing (1–20) and an interactive quiz mode to build counting skills.</p>
+      <div class="app-card-features">
+        <span class="feature-pill">Number Tracing</span>
+        <span class="feature-pill">Quiz Mode</span>
+        <span class="feature-pill">COPPA Compliant</span>
+        <span class="feature-pill">Rated 3+</span>
+      </div>
+      <div class="app-card-actions">
+        <a class="card-btn play" href="https://play.google.com/store/apps/details?id=com.tortugaapps.kids123" target="_blank">▶ Play Store</a>
+        <a class="card-btn policy" href="privacy-policy-kids123.html" target="_blank">📄 Privacy Policy</a>
+      </div>
+    </div>
+
+    <!-- Easy Draw Anime -->
+    <div class="app-card">
+      <span class="app-card-icon">✏️</span>
+      <span class="app-card-tag ar">AR · Creative</span>
+      <h3 class="app-card-name">AR Drawing — AR Anime Drawing</h3>
+      <p class="app-card-desc">An Augmented Reality creative tool that overlays drawing templates onto the real world for easy tracing. Perfect for learning to draw anime and sketches.</p>
+      <div class="app-card-features">
+        <span class="feature-pill">AR Tracing</span>
+        <span class="feature-pill">Anime Templates</span>
+        <span class="feature-pill">Camera-Based</span>
+        <span class="feature-pill">Free to Use</span>
+      </div>
+      <div class="app-card-actions">
+        <a class="card-btn play" href="https://play.google.com/store/apps/details?id=com.tortugaapps.artraceandsketch" target="_blank">▶ Play Store</a>
+        <a class="card-btn policy" href="privacy-policy-easydrawanime.html" target="_blank">📄 Privacy Policy</a>
+      </div>
+    </div>
+
+    <!-- Unit Converter -->
+    <div class="app-card">
+      <span class="app-card-icon">⚖️</span>
+      <span class="app-card-tag util">Utility · Offline</span>
+      <h3 class="app-card-name">Simple Unit Converter</h3>
+      <p class="app-card-desc">A clean, offline-first unit conversion utility. Convert length, weight, temperature, and more — no internet required, no data collected.</p>
+      <div class="app-card-features">
+        <span class="feature-pill">Fully Offline</span>
+        <span class="feature-pill">No Ads</span>
+        <span class="feature-pill">No Data Collected</span>
+        <span class="feature-pill">Lightweight</span>
+      </div>
+      <div class="app-card-actions">
+        <a class="card-btn play" href="https://play.google.com/store/apps/details?id=com.tortugaapps.simpleunitconverter" target="_blank">▶ Play Store</a>
+        <a class="card-btn policy" href="privacy-policy-simpleunitconverter.html" target="_blank">📄 Privacy Policy</a>
+      </div>
+    </div>
+
+    <!-- PDF Reader -->
+    <div class="app-card">
+      <span class="app-card-icon">📄</span>
+      <span class="app-card-tag pdf">Productivity · Local</span>
+      <h3 class="app-card-name">All PDF Reader</h3>
+      <p class="app-card-desc">A fast and reliable PDF reader that works entirely on your device. Browse, open, and manage all your PDF files locally — no cloud, no uploads.</p>
+      <div class="app-card-features">
+        <span class="feature-pill">Local Processing</span>
+        <span class="feature-pill">No Uploads</span>
+        <span class="feature-pill">File Management</span>
+        <span class="feature-pill">No Analytics</span>
+      </div>
+      <div class="app-card-actions">
+        <a class="card-btn play" href="https://play.google.com/store/apps/details?id=com.tortugaapps.allpdfreader" target="_blank">▶ Play Store</a>
+        <a class="card-btn policy" href="privacy-policy-allpdfreader.html" target="_blank">📄 Privacy Policy</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ ABOUT SECTION ═══ -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-content">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">Built with Purpose,<br>Shipped with Care</h2>
+      <p class="about-desc">
+        TORTUGA APPS (SMC-PRIVATE) LIMITED is a Pakistani Android app development studio focused on building practical, privacy-respecting apps for everyday users.
+      </p>
+      <p class="about-desc">
+        From educational tools for children to productivity apps for professionals, every product we ship is thoroughly tested, policy-compliant, and designed to genuinely help people.
+      </p>
+
+      <div class="about-values">
+        <div class="value-item">
+          <div class="value-icon" style="background:var(--accent-soft);border:1px solid var(--accent-border);">🔒</div>
+          <div>
+            <div class="value-title">Privacy First</div>
+            <div class="value-desc">We only collect what's needed. Most apps work fully offline with zero data collection.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon" style="background:var(--green-soft);border:1px solid var(--green-border);">✅</div>
+          <div>
+            <div class="value-title">Policy Compliant</div>
+            <div class="value-desc">All apps comply with Google Play Families Policy, COPPA, and GDPR where applicable.</div>
+          </div>
+        </div>
+        <div class="value-item">
+          <div class="value-icon" style="background:var(--gold-soft);border:1px solid rgba(255,209,102,0.2);">⭐</div>
+          <div>
+            <div class="value-title">Quality Focused</div>
+            <div class="value-desc">We ship polished, well-maintained apps — not rushed releases.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-visual">
+      <div class="about-stat-card">
+        <div class="asc-num">4+</div>
+        <div class="asc-label">Apps Published</div>
+      </div>
+      <div class="about-stat-card">
+        <div class="asc-num">1K+</div>
+        <div class="asc-label">Total Downloads</div>
+      </div>
+      <div class="about-stat-card">
+        <div class="asc-num">100%</div>
+        <div class="asc-label">Google Play Compliant</div>
+      </div>
+      <div class="about-stat-card">
+        <div class="asc-num">0</div>
+        <div class="asc-label">Data Sold or Shared</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMPLIANCE SECTION ═══ -->
+<section class="compliance-section">
+  <div class="compliance-inner">
+    <div class="section-label">Trust &amp; Compliance</div>
+    <h2 class="section-title">Built to the Highest Standards</h2>
+    <p class="section-desc">Our apps are developed in accordance with all major privacy regulations and platform policies.</p>
+    <div class="compliance-badges">
+      <div class="comp-badge green"><span class="cb-icon">🛡️</span> COPPA Compliant</div>
+      <div class="comp-badge blue"><span class="cb-icon">🇪🇺</span> GDPR-K Aware</div>
+      <div class="comp-badge gold"><span class="cb-icon">👨‍👩‍👧</span> Google Families Policy</div>
+      <div class="comp-badge purple"><span class="cb-icon">📱</span> Google Play Certified</div>
+      <div class="comp-badge green"><span class="cb-icon">🔒</span> No Data Selling</div>
+      <div class="comp-badge blue"><span class="cb-icon">🌐</span> Transparent Policies</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT SECTION ═══ -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">We'd Love to Hear From You</h2>
+    <p class="section-desc">Questions about our apps, privacy policies, or anything else? Drop us an email.</p>
+
+    <div class="contact-card">
+      <p class="contact-info">📧 Email us at</p>
+      <a class="contact-email-display" href="mailto:tortugaappsdev@gmail.com">tortugaappsdev@gmail.com</a>
+      <p class="contact-info" style="margin-top:10px;">🏢 TORTUGA APPS (SMC-PRIVATE) LIMITED</p>
+      <p class="contact-info">🇵🇰 Pakistan</p>
+      <br/>
+      <a href="mailto:tortugaappsdev@gmail.com" class="btn-primary" style="margin: 0 auto; display:inline-flex;">
+        <span>✉️</span> Send an Email
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-icon">🐢</div>
+      <div>
+        <div class="footer-brand-name">Tortuga<span>Apps</span></div>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#apps">Apps</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+  <div class="footer-copy">
+    © 2025 TORTUGA APPS (SMC-PRIVATE) LIMITED. All rights reserved. · Proudly made in Pakistan 🇵🇰
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  // Close mobile menu on outside click
+  document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // Close on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeMenu();
+  });
+
+  // Smooth scroll + close menu for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        closeMenu();
+        setTimeout(() => {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    });
+  });
+
+  // Navbar background on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.background = window.scrollY > 40
+      ? 'rgba(7,9,15,0.97)'
+      : 'rgba(7,9,15,0.85)';
+  });
+</script>
+
+</body>
+</html>

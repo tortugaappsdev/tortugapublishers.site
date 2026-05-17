@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — Simple Unit Converter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --surface: #131929;
+      --surface2: #1a2236;
+      --border: #1f2d45;
+      --accent: #3b82f6;
+      --accent2: #60a5fa;
+      --accent-glow: rgba(59,130,246,0.15);
+      --text: #e8edf5;
+      --text-muted: #8899b4;
+      --text-dim: #4a5d7a;
+      --green: #22c55e;
+      --green-bg: rgba(34,197,94,0.1);
+      --yellow: #f59e0b;
+      --note-bg: rgba(59,130,246,0.07);
+      --note-border: rgba(59,130,246,0.3);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 15px;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Background mesh */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 800px 500px at 20% 0%, rgba(59,130,246,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 400px at 80% 100%, rgba(96,165,250,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .app-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 16px 6px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent2);
+      letter-spacing: 0.03em;
+      margin-bottom: 24px;
+    }
+
+    .app-badge .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.85); }
+    }
+
+    .header h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #e8edf5 0%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+    }
+
+    .header .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .effective-date {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 6px 14px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-family: 'DM Mono', monospace;
+    }
+
+    .effective-date svg { flex-shrink: 0; }
+
+    /* ── TOC ── */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 48px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .toc-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+
+    .toc ol {
+      list-style: none;
+      display: grid;
+      gap: 4px;
+    }
+
+    .toc ol li a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      padding: 5px 0;
+      transition: color 0.2s;
+      border-bottom: 1px solid transparent;
+    }
+
+    .toc ol li a:hover { color: var(--accent2); }
+
+    .toc ol li a .num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      min-width: 20px;
+    }
+
+    /* ── Sections ── */
+    .section {
+      margin-bottom: 40px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .section:nth-child(1) { animation-delay: 0.15s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.25s; }
+    .section:nth-child(4) { animation-delay: 0.3s; }
+    .section:nth-child(5) { animation-delay: 0.35s; }
+    .section:nth-child(6) { animation-delay: 0.4s; }
+    .section:nth-child(7) { animation-delay: 0.45s; }
+    .section:nth-child(8) { animation-delay: 0.5s; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-glow);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: 6px;
+      padding: 4px 8px;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+
+    .section h2 {
+      font-size: clamp(17px, 3vw, 20px);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .section p {
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-size: 14.5px;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    /* ── Sub-sections ── */
+    .subsection {
+      margin: 20px 0;
+    }
+
+    .subsection h3 {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--accent2);
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .subsection h3::before {
+      content: '';
+      display: inline-block;
+      width: 3px; height: 14px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* ── Note box ── */
+    .note {
+      background: var(--note-bg);
+      border: 1px solid var(--note-border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .note .note-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Tables ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      min-width: 400px;
+    }
+
+    thead tr {
+      background: var(--surface2);
+    }
+
+    thead th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-top: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover { background: var(--surface2); }
+
+    tbody td {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+
+    tbody td:first-child {
+      font-family: 'DM Mono', monospace;
+      font-size: 12.5px;
+      color: var(--accent2);
+      white-space: nowrap;
+    }
+
+    .badge-yes {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--green-bg);
+      border: 1px solid rgba(34,197,94,0.2);
+      color: var(--green);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .table-link {
+      color: var(--accent2);
+      text-decoration: none;
+      font-size: 12.5px;
+      border-bottom: 1px dashed rgba(96,165,250,0.4);
+      transition: border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .table-link:hover { border-color: var(--accent2); }
+
+    /* ── Bullet list ── */
+    .policy-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .policy-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--text-muted);
+      font-size: 14.5px;
+    }
+
+    .policy-list li::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      min-width: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 9px;
+    }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .contact-info { display: grid; gap: 10px; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .contact-item .icon {
+      width: 36px; height: 36px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(59,130,246,0.2);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .contact-item a {
+      color: var(--accent2);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .contact-item a:hover { color: var(--text); }
+
+    .contact-item .label {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    .company-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 12.5px;
+    }
+
+    .footer span { color: var(--text-muted); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .page-wrapper { padding: 36px 16px 60px; }
+      .toc { padding: 18px 18px; }
+      .contact-card { padding: 20px 18px; flex-direction: column; align-items: flex-start; }
+      .section-header { gap: 10px; }
+      table { min-width: 340px; }
+      thead th, tbody td { padding: 10px 12px; }
+    }
+
+    @media (max-width: 400px) {
+      .header h1 { font-size: 24px; }
+      .section h2 { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="app-badge">
+      <span class="dot"></span>
+      Simple Unit Converter
+    </div>
+    <h1>Privacy Policy</h1>
+    <p class="subtitle">TORTUGA APPS (SMC-PRIVATE) LIMITED</p>
+    <div class="effective-date">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+      </svg>
+      Effective Date: 16 May 2025
+    </div>
+  </header>
+
+  <!-- Table of Contents -->
+  <nav class="toc" aria-label="Table of Contents">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#s1"><span class="num">01</span> Introduction</a></li>
+      <li><a href="#s2"><span class="num">02</span> Information We Collect</a></li>
+      <li><a href="#s3"><span class="num">03</span> Permissions Used in the App</a></li>
+      <li><a href="#s4"><span class="num">04</span> Third-Party SDKs &amp; Families Policy Compliance</a></li>
+      <li><a href="#s5"><span class="num">05</span> Data Retention &amp; Security</a></li>
+      <li><a href="#s6"><span class="num">06</span> Children's Privacy</a></li>
+      <li><a href="#s7"><span class="num">07</span> Changes to This Privacy Policy</a></li>
+      <li><a href="#s8"><span class="num">08</span> Contact Us</a></li>
+    </ol>
+  </nav>
+
+  <!-- Section 1 -->
+  <section class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Introduction</h2>
+    </div>
+    <p>
+      <strong style="color:var(--text)">TORTUGA APPS (SMC-PRIVATE) LIMITED</strong> ("we", "us", or "our") respects your privacy. This Privacy Policy outlines how the <strong style="color:var(--text)">Simple Unit Converter</strong> app ("the App") manages user data.
+    </p>
+    <p>
+      The App is a utility tool that functions offline, with a single exception: it may access the internet only to load the Privacy Policy page when requested by the user.
+    </p>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Information We Collect</h2>
+    </div>
+
+    <div class="subsection">
+      <h3>User-Provided Data</h3>
+      <p>When using the App, you may enter values for unit conversions. These inputs are processed locally on your device and are never sent to our servers or any third party.</p>
+    </div>
+
+    <div class="subsection">
+      <h3>Automatically Collected Data</h3>
+      <p>The App does not automatically collect personal or device data. It contains no analytics or advertising SDKs.</p>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Permissions Used in the App</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Permission</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>INTERNET</td>
+            <td>Required only to open the Privacy Policy web page. No other online activity is performed by the App.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="note-icon">ℹ️</span>
+      <span>No background internet activity is conducted. The App does not send or receive data except when the privacy policy URL is accessed.</span>
+    </div>
+  </section>
+
+  <!-- Section 4 -->
+  <section class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Third-Party SDKs &amp; Families Policy Compliance</h2>
+    </div>
+    <p>The App uses standard Android support libraries. These SDKs are compliant with Google's Families Policy, do not collect personal or sensitive data, and are listed below for transparency:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>SDK Name</th>
+            <th>Purpose</th>
+            <th>Families Policy</th>
+            <th>Privacy Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>androidx.core.ktx</td>
+            <td>Kotlin extensions</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/core" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.appcompat</td>
+            <td>Backward compatibility</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/appcompat" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>com.google.android.material</td>
+            <td>UI Components</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://policies.google.com/privacy" target="_blank">Google Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.activity</td>
+            <td>Activity lifecycle support</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/activity" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.constraintlayout</td>
+            <td>Layout design</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/constraintlayout" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.core.splashscreen</td>
+            <td>Splash screen support</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/core" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="note-icon">ℹ️</span>
+      <span><strong style="color:var(--text)">Disclaimer:</strong> TORTUGA APPS (SMC-PRIVATE) LIMITED does not control these SDKs individually. Each is subject to its own privacy policy.</span>
+    </div>
+  </section>
+
+  <!-- Section 5 -->
+  <section class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Data Retention &amp; Security</h2>
+    </div>
+    <ul class="policy-list">
+      <li>The App does not collect or store personal data.</li>
+      <li>All user input is processed locally on the device.</li>
+      <li>While the App requires internet access to display the Privacy Policy, it does not transmit any data to us.</li>
+      <li>The App follows industry best practices for secure coding and local data handling.</li>
+    </ul>
+  </section>
+
+  <!-- Section 6 -->
+  <section class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Children's Privacy</h2>
+    </div>
+    <p>
+      This App is suitable for users of all ages and is not directed toward children under 13. It does not collect, store, or share any personal data from any user.
+    </p>
+  </section>
+
+  <!-- Section 7 -->
+  <section class="section" id="s7">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Changes to This Privacy Policy</h2>
+    </div>
+    <p>We may update this policy to reflect changes in legal or functional requirements.</p>
+    <ul class="policy-list">
+      <li>Updates will be posted on this page.</li>
+    </ul>
+  </section>
+
+  <!-- Section 8 -->
+  <section class="section" id="s8">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Contact Us</h2>
+    </div>
+    <p>For questions or concerns about this Privacy Policy, please reach out to us:</p>
+
+    <div class="contact-card">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="icon">📧</div>
+          <div>
+            <div class="label">Email</div>
+            <a href="mailto:tortugaappsdev@gmail.com">tortugaappsdev@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon">🏢</div>
+          <div>
+            <div class="label">Company</div>
+            <span class="company-name">TORTUGA APPS (SMC-PRIVATE) LIMITED</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 <span>TORTUGA APPS (SMC-PRIVATE) LIMITED</span>. All rights reserved.</p>
+    <p style="margin-top:6px;">Simple Unit Converter — Privacy Policy v1.0</p>
+  </footer>
+
+</div>
+</body>
+</html>

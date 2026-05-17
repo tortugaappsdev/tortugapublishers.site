@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy — Kids 123 Learning App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #fdf8f2;
+      --surface: #ffffff;
+      --surface2: #fef3e2;
+      --border: #f0e4cf;
+      --accent: #f97316;
+      --accent2: #fb923c;
+      --accent-soft: rgba(249,115,22,0.1);
+      --accent-border: rgba(249,115,22,0.25);
+      --blue: #3b82f6;
+      --blue-bg: rgba(59,130,246,0.08);
+      --blue-border: rgba(59,130,246,0.2);
+      --green: #16a34a;
+      --green-bg: rgba(22,163,74,0.1);
+      --green-border: rgba(22,163,74,0.2);
+      --purple: #7c3aed;
+      --purple-bg: rgba(124,58,237,0.08);
+      --text: #1c1917;
+      --text-muted: #57534e;
+      --text-dim: #a8a29e;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 15px;
+      overflow-x: hidden;
+    }
+
+    /* Decorative top stripe */
+    .top-stripe {
+      height: 5px;
+      background: linear-gradient(90deg, #f97316, #fb923c, #facc15, #4ade80, #60a5fa, #c084fc);
+    }
+
+    .page-wrapper {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 52px 24px 80px;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 52px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .app-icon {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, #fef08a 0%, #fb923c 100%);
+      border-radius: 22px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px;
+      margin: 0 auto 20px;
+      box-shadow: 0 8px 24px rgba(249,115,22,0.25);
+      animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.6); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .header h1 {
+      font-size: clamp(26px, 5vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .header h1 span { color: var(--accent); }
+
+    .header .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      box-shadow: var(--shadow);
+    }
+
+    .meta-chip.date { color: var(--accent); border-color: var(--accent-border); background: var(--accent-soft); }
+    .meta-chip.coppa { color: var(--blue); border-color: var(--blue-border); background: var(--blue-bg); }
+    .meta-chip.gdpr { color: var(--purple); border-color: rgba(124,58,237,0.2); background: var(--purple-bg); }
+    .meta-chip.families { color: var(--green); border-color: var(--green-border); background: var(--green-bg); }
+
+    /* ── TOC ── */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 44px;
+      box-shadow: var(--shadow);
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .toc-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+
+    .toc ol {
+      list-style: none;
+      display: grid;
+      gap: 2px;
+    }
+
+    .toc ol li a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 6px 8px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .toc ol li a:hover { background: var(--surface2); color: var(--accent); }
+
+    .toc ol li a .num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      min-width: 22px;
+    }
+
+    /* ── Section ── */
+    .section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .section:nth-child(1) { animation-delay: 0.15s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.25s; }
+    .section:nth-child(4) { animation-delay: 0.3s; }
+    .section:nth-child(5) { animation-delay: 0.35s; }
+    .section:nth-child(6) { animation-delay: 0.4s; }
+    .section:nth-child(7) { animation-delay: 0.45s; }
+    .section:nth-child(8) { animation-delay: 0.5s; }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 2px solid var(--bg);
+    }
+
+    .section-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      margin-top: 3px;
+      white-space: nowrap;
+    }
+
+    .section h2 {
+      font-size: clamp(16px, 3vw, 19px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .section p {
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-size: 14.5px;
+      font-weight: 500;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    /* ── Sub-section ── */
+    .subsection { margin: 18px 0; }
+
+    .subsection h3 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .subsection h3::before {
+      content: '';
+      display: inline-block;
+      width: 4px; height: 14px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    /* ── Note boxes ── */
+    .note {
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 13.5px;
+      font-weight: 500;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .note.blue {
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      border-left: 3px solid var(--blue);
+      color: #1e40af;
+    }
+
+    .note.orange {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-left: 3px solid var(--accent);
+      color: #9a3412;
+    }
+
+    .note.green {
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      border-left: 3px solid var(--green);
+      color: #14532d;
+    }
+
+    .note .note-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Permissions list ── */
+    .perm-list {
+      display: grid;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .perm-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .perm-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      background: var(--blue-bg);
+      color: var(--blue);
+      border: 1px solid var(--blue-border);
+      border-radius: 6px;
+      padding: 3px 8px;
+      white-space: nowrap;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .perm-badge.removed {
+      background: var(--green-bg);
+      color: var(--green);
+      border-color: var(--green-border);
+    }
+
+    .perm-text { font-size: 13.5px; color: var(--text-muted); font-weight: 500; }
+    .perm-text strong { color: var(--text); font-weight: 700; display: block; margin-bottom: 3px; font-size: 13px; font-family: 'DM Mono', monospace; }
+
+    /* ── Tables ── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 18px 0;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      font-weight: 500;
+      min-width: 520px;
+    }
+
+    thead tr { background: var(--surface2); }
+
+    thead th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    tbody tr { border-top: 1px solid var(--border); transition: background 0.15s; }
+    tbody tr:hover { background: var(--surface2); }
+
+    tbody td {
+      padding: 12px 16px;
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+
+    tbody td:first-child {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text);
+      min-width: 160px;
+    }
+
+    .badge-yes {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--green-bg);
+      border: 1px solid var(--green-border);
+      color: var(--green);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .table-link {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 12px;
+      border-bottom: 1px dashed rgba(59,130,246,0.3);
+      transition: border-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .table-link:hover { border-color: var(--blue); }
+
+    /* ── Bullet list ── */
+    .policy-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .policy-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--text-muted);
+      font-size: 14.5px;
+      font-weight: 500;
+    }
+
+    .policy-list li::before {
+      content: '';
+      display: inline-block;
+      width: 7px; height: 7px;
+      min-width: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-top: 9px;
+    }
+
+    /* ── Children's privacy highlight ── */
+    .children-highlights {
+      display: grid;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .children-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .children-item .ci-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .children-item .ci-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .children-item .ci-text {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ── Contact ── */
+    .contact-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+
+    .contact-item .icon {
+      width: 40px; height: 40px;
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-item a {
+      color: var(--accent);
+      text-decoration: none;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .contact-item a:hover { opacity: 0.7; }
+    .contact-item .label { font-size: 11px; color: var(--text-dim); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .contact-item .company-name { font-size: 13px; font-weight: 700; color: var(--text); }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    .footer span { color: var(--text-muted); }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .page-wrapper { padding: 32px 14px 60px; }
+      .section { padding: 20px 18px; }
+      .toc { padding: 18px 16px; }
+      .contact-card { flex-direction: column; }
+      .meta-row { gap: 8px; }
+      table { min-width: 440px; }
+    }
+
+    @media (max-width: 400px) {
+      .header h1 { font-size: 23px; }
+      .section h2 { font-size: 15px; }
+      .app-icon { width: 64px; height: 64px; font-size: 32px; }
+    }
+
+  .perm-item {
+    flex-wrap: wrap;
+  }
+
+  .perm-badge {
+    max-width: 100%;
+  }
+
+  .perm-text {
+    min-width: 0;
+    word-break: break-word;
+  }
+
+  .perm-text strong {
+    word-break: break-all;
+  }
+
+  @media (max-width: 640px) {
+    .perm-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .perm-badge {
+      margin-bottom: 6px;
+    }
+  }
+  </style>
+</head>
+<body>
+
+<div class="top-stripe"></div>
+
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="app-icon">🔢</div>
+    <h1>Privacy Policy<br><span>Kids 123 Learning</span></h1>
+    <p class="subtitle">TORTUGA APPS (SMC-PRIVATE) LIMITED</p>
+    <div class="meta-row">
+      <span class="meta-chip date">📅 Effective: 4 November 2025</span>
+      <span class="meta-chip coppa">✓ COPPA Compliant</span>
+      <span class="meta-chip gdpr">✓ GDPR-K Compliant</span>
+      <span class="meta-chip families">✓ Google Families Policy</span>
+    </div>
+  </header>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Table of Contents">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#s1"><span class="num">01</span> Introduction</a></li>
+      <li><a href="#s2"><span class="num">02</span> Information We Collect</a></li>
+      <li><a href="#s3"><span class="num">03</span> Permissions Used in the App</a></li>
+      <li><a href="#s4"><span class="num">04</span> Third-Party SDKs &amp; Families Policy Compliance</a></li>
+      <li><a href="#s5"><span class="num">05</span> Children's Privacy</a></li>
+      <li><a href="#s6"><span class="num">06</span> Changes to This Privacy Policy</a></li>
+      <li><a href="#s7"><span class="num">07</span> Contact Us</a></li>
+    </ol>
+  </nav>
+
+  <!-- S1 Introduction -->
+  <section class="section" id="s1">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Introduction</h2>
+    </div>
+    <p>
+      <strong>TORTUGA APPS (SMC-PRIVATE) LIMITED</strong> ("we," "us," or "our") is committed to protecting the privacy and safety of children using our mobile application, <strong>Kids 123 Learning</strong> ("the App"). This Privacy Policy outlines how the App manages data in compliance with applicable regulations, including COPPA, GDPR-K, and Google Play's Families Policy.
+    </p>
+    <p>
+      The App is designed for young children and offers two primary features: <strong>number learning (1–20)</strong> and a <strong>simple number quiz</strong>. The App includes advertising to support its development.
+    </p>
+  </section>
+
+  <!-- S2 Information We Collect -->
+  <section class="section" id="s2">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Information We Collect</h2>
+    </div>
+
+    <div class="subsection">
+      <h3>User-Provided Data</h3>
+      <p>The App does not require or collect any user-entered personal data.</p>
+    </div>
+
+    <div class="subsection">
+      <h3>Automatically Collected Data</h3>
+      <p>To provide functionality and monetize the App, we use third-party SDKs that may automatically collect certain data. This data is not directly collected or stored by us, but by the third-party providers.</p>
+
+      <ul class="policy-list">
+        <li><strong>Device Identifiers:</strong> We have taken steps to ensure that personal identifiers — such as the Android Advertising ID (AAID) — are not collected or transmitted by our third-party SDKs. The App is configured to prevent collection of this data.</li>
+        <li><strong>Crash and Usage Data:</strong> The App uses Firebase Crashlytics to collect crash reports and Firebase Analytics to understand how users interact with the App. This data is anonymized and helps improve stability and features. Data collected includes device model, OS version, app usage, and crash events.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- S3 Permissions -->
+  <section class="section" id="s3">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Permissions Used in the App</h2>
+    </div>
+    <p>The App requests and uses the following Android permissions:</p>
+
+    <div class="perm-list">
+      <div class="perm-item">
+        <span class="perm-badge">GRANTED</span>
+        <div class="perm-text">
+          <strong>android.permission.INTERNET</strong>
+          Required for third-party SDKs to function, including serving ads and sending crash/analytics data.
+        </div>
+      </div>
+      <div class="perm-item">
+        <span class="perm-badge">GRANTED</span>
+        <div class="perm-text">
+          <strong>android.permission.ACCESS_NETWORK_STATE</strong>
+          Allows the App to check network status (Wi-Fi or mobile data) to optimize data usage for SDKs.
+        </div>
+      </div>
+      <div class="perm-item">
+        <span class="perm-badge removed">REMOVED</span>
+        <div class="perm-text">
+          <strong>com.google.android.gms.permission.AD_ID</strong>
+          This permission is explicitly removed from the App's manifest. The App cannot access the Android Advertising ID, preventing personalized or targeted advertising and strengthening user privacy.
+        </div>
+      </div>
+    </div>
+
+    <div class="note green">
+      <span class="note-icon">🛡️</span>
+      <span>By removing the AD_ID permission, we ensure no user-specific identifiers can be used for ad targeting — a key safeguard for child-directed apps.</span>
+    </div>
+  </section>
+
+  <!-- S4 SDKs -->
+  <section class="section" id="s4">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Third-Party SDKs &amp; Families Policy Compliance</h2>
+    </div>
+    <p>The App uses the following third-party SDKs, selected to ensure compliance with Google Play's Families Policy and applicable regulations:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>SDK Name</th>
+            <th>Purpose</th>
+            <th>Families Policy</th>
+            <th>Privacy Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Google Mobile Ads (AdMob)</td>
+            <td>Serves contextual, non-personalized ads. Configured as child-directed; AAID use is disabled.</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://policies.google.com/privacy" target="_blank">Google Privacy</a></td>
+          </tr>
+          <tr>
+            <td>Firebase Crashlytics</td>
+            <td>Collects crash reports to monitor and improve app stability.</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://firebase.google.com/support/privacy" target="_blank">Firebase Privacy</a></td>
+          </tr>
+          <tr>
+            <td>Firebase Analytics</td>
+            <td>Provides anonymized usage statistics to improve user experience.</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://firebase.google.com/support/privacy" target="_blank">Firebase Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.core.ktx</td>
+            <td>Kotlin extensions</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/core" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.appcompat</td>
+            <td>Backward compatibility</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/appcompat" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>com.google.android.material</td>
+            <td>Material UI Components</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://policies.google.com/privacy" target="_blank">Google Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.activity</td>
+            <td>Activity lifecycle support</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/activity" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.constraintlayout</td>
+            <td>Layout and UI design</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/constraintlayout" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.emoji2</td>
+            <td>Ensures emojis display correctly across Android versions.</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/emoji2" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+          <tr>
+            <td>androidx.emoji2:emoji2-bundled</td>
+            <td>Includes font files for emoji compatibility on older devices.</td>
+            <td><span class="badge-yes">✓ Yes</span></td>
+            <td><a class="table-link" href="https://developer.android.com/jetpack/androidx/releases/emoji2" target="_blank">AndroidX Privacy</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note orange">
+      <span class="note-icon">ℹ️</span>
+      <span><strong>Disclaimer:</strong> TORTUGA APPS (SMC-PRIVATE) LIMITED does not control these SDKs individually. Each SDK is governed by its own privacy policy. We have configured these SDKs to comply with child privacy laws, but we are not responsible for their direct data collection and use.</span>
+    </div>
+  </section>
+
+  <!-- S5 Children's Privacy -->
+  <section class="section" id="s5">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Children's Privacy</h2>
+    </div>
+    <p>This App is intended for children under the age of 13. We are fully committed to complying with COPPA, GDPR-K, and the Google Play Families Policy.</p>
+
+    <div class="children-highlights">
+      <div class="children-item">
+        <span class="ci-icon">🚫</span>
+        <div>
+          <div class="ci-title">No Personal Data Collection</div>
+          <div class="ci-text">We do not knowingly collect, store, or transmit any personally identifiable information from children. By removing the AD_ID permission, we prevent the collection of the Android Advertising ID, ensuring no user-specific identifiers are used for ad targeting.</div>
+        </div>
+      </div>
+      <div class="children-item">
+        <span class="ci-icon">📢</span>
+        <div>
+          <div class="ci-title">Advertising</div>
+          <div class="ci-text">All ads served through Google AdMob are contextual and non-personalized. We ensure all ad requests are tagged as "child-directed," which disables interest-based advertising and remarketing for all users.</div>
+        </div>
+      </div>
+      <div class="children-item">
+        <span class="ci-icon">📊</span>
+        <div>
+          <div class="ci-title">Analytics</div>
+          <div class="ci-text">Firebase Analytics is configured to collect only anonymized data in a manner compliant with COPPA and GDPR. It does not collect any personally identifiable information from children.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- S6 Changes -->
+  <section class="section" id="s6">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Changes to This Privacy Policy</h2>
+    </div>
+    <p>We may update this policy to reflect changes in legal requirements or app functionality. When we do, the "Effective Date" at the top of this page will be updated.</p>
+    <div class="note blue">
+      <span class="note-icon">🔔</span>
+      <span>We recommend reviewing this policy periodically for any updates.</span>
+    </div>
+  </section>
+
+  <!-- S7 Contact -->
+  <section class="section" id="s7">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Contact Us</h2>
+    </div>
+    <p>For any questions about this Privacy Policy or our data practices, please contact us:</p>
+    <div class="contact-card">
+      <div class="contact-item">
+        <div class="icon">📧</div>
+        <div>
+          <div class="label">Email</div>
+          <a href="mailto:tortugaappsdev@gmail.com">tortugaappsdev@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="icon">🏢</div>
+        <div>
+          <div class="label">Company</div>
+          <span class="company-name">TORTUGA APPS (SMC-PRIVATE) LIMITED</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 <span>TORTUGA APPS (SMC-PRIVATE) LIMITED</span>. All rights reserved.</p>
+    <p style="margin-top:6px;">Kids 123 Learning — Privacy Policy v1.0</p>
+  </footer>
+
+</div>
+</body>
+</html>
